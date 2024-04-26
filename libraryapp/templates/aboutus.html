@@ -1,0 +1,128 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Library Management System</title>
+    <style>
+        /* Resetting default browser styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .team-member-info {
+            flex: 1;
+        }
+
+        .team-member-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .team-member-role {
+            color: #777;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+{% block body %}
+<div class="container">
+    <h1>About Us</h1>
+
+    <p>Welcome to the Library Management System! We strive to create an enriching environment where knowledge thrives and learning becomes an exciting journey.</p>
+
+    <h2>Our Library</h2>
+    <p>Our library houses a vast collection of books covering a wide range of subjects including literature, science, history, technology, and more. Whether you're a student, a researcher, or an avid reader, you'll find something of interest here.</p>
+
+    <h2>Book Categories</h2>
+    <ul>
+        <li>Classic Literature</li>
+        <li>Science Fiction</li>
+        <li>Biographies</li>
+        <li>History</li>
+        <li>Self-Help</li>
+        <li>Academic Textbooks</li>
+        <li>And many more...</li>
+    </ul>
+
+    <h2>Our Team</h2>
+
+    <div class="team-member">
+
+        <div class="team-member-info">
+            <p class="team-member-name">Tejaswari</p>
+            <p class="team-member-role">Founder & CEO</p>
+        </div>
+    </div>
+
+    <div class="team-member">
+
+        <div class="team-member-info">
+            <p class="team-member-name">Dhedeepya</p>
+            <p class="team-member-role">Head Librarian</p>
+        </div>
+    </div>
+
+    <div class="team-member">
+
+        <div class="team-member-info">
+            <p class="team-member-name">Sahithi</p>
+            <p class="team-member-role">Technical Lead</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Library Management System</p>
+</div>
+ {% endblock %}
+</body>
+</html>

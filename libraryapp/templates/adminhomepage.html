@@ -1,0 +1,72 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home Page</title>
+    <style>
+body {
+    background-image: url("https://turkyaybir.org.tr/wp-content/uploads/2015/10/376152628_249e3630c0_o.jpg");
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Set background color */
+}
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff; /* Background color for the container */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .admin-options {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .admin-options li {
+            margin-bottom: 10px;
+        }
+
+        .admin-options li a {
+            display: block;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .admin-options li a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+{% block body %}
+
+<div class="container">
+
+    <h1>Welcome Admin!</h1>
+    <ul class="admin-options">
+        <li><a href="{% url 'add_book' %}">Manage Books</a></li>
+
+        <li><a href="{% url 'book_list' %}">book list</a></li>
+
+        <!-- Add more options as needed -->
+    </ul>
+</div>
+    {% endblock %}
+</body>
+</html>

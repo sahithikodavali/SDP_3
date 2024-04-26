@@ -1,0 +1,53 @@
+{% extends 'adminnavbar.html' %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Information</title>
+
+</head>
+
+<body>
+{% block body %}
+    <h2 style="text-align:center">Book Information</h2>
+    <table align="center">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Name</th>
+
+                <th>Category</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.BookId }}</td>
+                <td>{{ book.BookName }}</td>
+
+                <td>{{ book.BookCategory }}</td>
+                <td>
+                    <a href="{% url 'eemp' employee.pk %}">Update</a>
+                </td>
+                <td>
+                    <a href="{% url 'remove-emp' employee.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br><br>
+    <p class="alert alert-danger" role="alert">Do you want to enter more Employees?</p>
+
+    <p>
+        <a href="{% url 'insert-emp' %}">&lt;-- Go To Home Page</a>
+    </p>
+{% endblock %}
+
+</body>
+</html>

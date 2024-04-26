@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Book</title>
+</head>
+<body>
+    <h1>Issue Book</h1>
+    <li><a href="{% url 'issue_book' %}">Book list</a></li>
+    <form action="/issue_book/" method="post">
+        {% csrf_token %}
+        <label for="borrower">Select Borrower:</label>
+        <select name="borrower" id="borrower">
+            {% for borrower in borrowers %}
+            <option value="{{ borrower.id }}">{{ borrower.name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="title">Book Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br><br>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+        <br><br>
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" required>
+        <br><br>
+        <button type="submit">Issue Book</button>
+    </form>
+</body>
+</html>

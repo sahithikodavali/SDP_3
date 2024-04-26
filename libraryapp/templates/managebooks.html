@@ -1,0 +1,182 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Books</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<style>
+    /* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Book list styles */
+#bookList {
+    margin-top: 20px;
+}
+
+.book-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.book-item p {
+    margin: 0;
+}
+
+.book-item button {
+    margin-left: 10px;
+}
+
+.book-item hr {
+    margin-top: 10px;
+}
+
+
+{% block body %}
+<li><a href="{% url 'add_book' %}">Manage Books</a></li>
+    <div class="container">
+        <h1>Manage Books</h1>
+        <div id="bookList">
+            <!-- Book list will be dynamically added here -->
+        </div>
+        <hr>
+        <h2>Add New Book</h2>
+        <form id="addBookForm">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" required>
+            </div>
+            <div>
+                <label for="author">Author:</label>
+                <input type="text" id="author" required>
+            </div>
+            <div>
+                <label for="isbn">ISBN:</label>
+                <input type="text" id="isbn" required>
+            </div>
+            <button type="submit">Add Book</button>
+        </form>
+    </div>
+
+    <script>
+        // Dummy book data (you can replace it with actual data from a database)
+        let books = [
+            { id: 1, title: "Book 1", author: "Author 1", isbn: "1234567890" },
+            { id: 2, title: "Book 2", author: "Author 2", isbn: "0987654321" }
+        ];
+
+        // Function to display books
+        function displayBooks() {
+            const bookList = document.getElementById("bookList");
+            bookList.innerHTML = ""; // Clear previous content
+
+            books.forEach(book => {
+                const bookDiv = document.createElement("div");
+                bookDiv.innerHTML = `
+                    <p><strong>Title:</strong> ${book.title}</p>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>ISBN:</strong> ${book.isbn}</p>
+                    <button onclick="editBook(${book.id})">Edit</button>
+                    <button onclick="deleteBook(${book.id})">Delete</button>
+                    <hr>
+                `;
+                bookList.appendChild(bookDiv);
+            });
+        }
+
+        // Function to add a new book
+        function addBook(title, author, isbn) {
+            const id = books.length + 1;
+            books.push({ id, title, author, isbn });
+            displayBooks();
+        }
+
+        // Function to delete a book
+        function deleteBook(id) {
+            books = books.filter(book => book.id !== id);
+            displayBooks();
+        }
+
+        // Function to handle form submission
+        document.getElementById("addBookForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const isbn = document.getElementById("isbn").value;
+
+            addBook(title, author, isbn);
+
+            // Reset form fields
+            this.reset();
+        });
+
+        // Initial display of books
+        displayBooks();
+    </script>
+ {% endblock %}
+
+</style>
+</body>
+</html>

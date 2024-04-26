@@ -1,0 +1,28 @@
+{% extends 'Navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+</head>
+<body>
+{% block body %}
+    <h1>Book List</h1>
+    <ul>
+        {% for book in books %}
+            <li>Title: {{ book.title }}</li>
+            <li>Author: {{ book.author }}</li>
+            <li>Genre: {{ book.genre }}</li>
+
+            <!-- Add more details as needed -->
+            <br>
+            <center>
+                <!-- Pass the book.id to the delete_book URL -->
+                <a href="{% url 'delete_book' book.id %}"><button>Delete Book</button></a>
+            </center>
+        {% endfor %}
+    </ul>
+{% endblock %}
+</body>
+</html>

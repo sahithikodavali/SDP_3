@@ -1,0 +1,151 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <style>
+        /* Resetting default browser styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .profile-info {
+            margin-bottom: 30px;
+        }
+
+        .profile-info h2 {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .profile-info p {
+            color: #777;
+        }
+
+        .books-section {
+            margin-bottom: 20px;
+        }
+
+        .books-section h2 {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .book {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .book img {
+            width: 50px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .book-details {
+            flex: 0;
+        }
+
+        .book-title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .book-author {
+            color: #777;
+        }
+
+        .new-arrivals {
+            margin-bottom: 30px;
+        }
+
+        .new-arrivals h2 {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .new-arrival {
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+{% block body %}
+<div class="container">
+    <h1>Admin Profile</h1>
+
+    <div class="profile-info">
+        <h2>Admin Details</h2>
+<h1>Welcome, {{user.username}}</h1>
+        <p>Email: abcdadmin@gmail.com</p>
+        <p>Role: Library Manager</p>
+    </div>
+
+    <div class="books-section">
+        <h2>Books Details</h2>
+        <div class="book">
+            <img src="https://m.media-amazon.com/images/I/616Y1Alh01L._AC_UY436_FMwebp_QL65_.jpg" width="200", height="200" alt="Book 1">
+            <div class="book-details">
+                <p class="book-title">Learn C Programming from Scratch</p>
+                <p class="book-author">Author:Mohammad Saleem Mir </p>
+            </div>
+        </div>
+        <div class="book">
+            <img src="https://m.media-amazon.com/images/I/71iagi1dv-L._AC_UY436_FMwebp_QL65_.jpg" width="200", height="200"  alt="Book 2">
+            <div class="book-details">
+                <p class="book-title">Let us Python- 6th Edition</p>
+                <p class="book-author">Author: Aditya Kanetkar</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="new-arrivals">
+        <h2>New Arrivals</h2>
+        <div class="new-arrival">Java Programming</div>
+        <div class="new-arrival">Let us code</div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Library Management Store</p>
+</div>
+
+    {% endblock %}
+</body>
+</html>

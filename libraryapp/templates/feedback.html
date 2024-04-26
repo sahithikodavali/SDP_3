@@ -1,0 +1,116 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .feedback-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feedback-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .feedback-item:last-child {
+            margin-bottom: 0;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            padding: 12px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Feedback</h1>
+        <ul class="feedback-list" id="feedbackList">
+            <!-- Feedback items will be dynamically added here -->
+        </ul>
+        <form id="contactForm">
+            <input type="text" name="message" placeholder="Enter your feedback" required>
+            <input type="submit" value="Submit Feedback">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Get the form data
+            var formData = new FormData(document.getElementById("contactForm"));
+
+            // Send the form data to the server using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/submit_feedback"); // Change the URL to your server endpoint
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert("Feedback submitted!"); // Display a success message
+                    // You can redirect to another page here if needed
+                    var newFeedback = document.createElement("li");
+                    newFeedback.classList.add("feedback-item");
+                    newFeedback.textContent = formData.get("message");
+                    document.getElementById("feedbackList").appendChild(newFeedback);
+                } else {
+                    alert("Error submitting feedback. Please try again."); // Display an error message
+                }
+            };
+            xhr.send(JSON.stringify(Object.fromEntries(formData.entries())));
+        });
+    </script>
+</body>
+</html>

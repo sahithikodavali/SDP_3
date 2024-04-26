@@ -1,0 +1,97 @@
+{% extends 'adminnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <style>
+        <style>
+    /* Existing CSS styles */
+
+    /* Enlarge input blocks */
+    input[type="text"] {
+        padding: 12px; /* Increase padding for better visibility and spacing */
+        margin-bottom: 15px; /* Increase margin bottom for better separation between input blocks */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 100%; /* Make the input blocks fill the entire width of their container */
+    }
+
+    /* Additional CSS to adjust specific input blocks */
+    input[name="Name"] {
+        height: 40px; /* Increase height for the "Name" input block */
+    }
+
+    input[name="userid"] {
+        height: 40px; /* Increase height for the "UserID" input block */
+    }
+
+    input[name="email"] {
+        height: 40px; /* Increase height for the "Email" input block */
+    }
+     input[type="text"] {
+            padding: 12px; /* Increase padding for better visibility and spacing */
+            margin-bottom: 15px; /* Increase margin bottom for better separation between input blocks */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%; /* Make the input blocks fill the entire width of their container */
+        }
+
+
+        input[name="message"] {
+            height: 100px; /* Increase height for the "Name", "Email", and "Enter your feedback" input blocks */
+        }
+    </style>
+</head>
+<body>
+{% block body %}
+    <div class="container">
+        <h1>Feedback</h1>
+        <ul class="feedback-list" id="feedbackList">
+            <!-- Feedback items will be dynamically added here -->
+        </ul>
+        <form id="contactForm">
+            <div> <input type="text" name="message" placeholder="Name" required></div>
+
+            <div><input type="text" name="message" placeholder="Email" required></div>
+
+            <div><input type="text" name="message" placeholder="UserId" required></div>
+
+            <div><input type="text" name="message" placeholder="Enter your feedback" required></div>
+            <input type="submit" value="Submit Feedback">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Get the form data
+            var formData = new FormData(document.getElementById("contactForm"));
+
+            // Send the form data to the server using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/submit_feedback"); // Change the URL to your server endpoint
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert("Feedback submitted!"); // Display a success message
+                    // You can redirect to another page here if needed
+                    var newFeedback = document.createElement("li");
+                    newFeedback.classList.add("feedback-item");
+                    newFeedback.textContent = formData.get("message");
+                    document.getElementById("feedbackList").appendChild(newFeedback);
+                } else {
+                    alert("Error submitting feedback. Please try again."); // Display an error message
+                }
+            };
+            xhr.send(JSON.stringify(Object.fromEntries(formData.entries())));
+        });
+    </script>
+
+    {% endblock %}
+</body>
+</html>
